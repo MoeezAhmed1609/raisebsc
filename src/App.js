@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material";
+
+import "./App.css";
+
+// Pages
+import Home from "./pages/Home";
+
+// Components
+import ScrollToHashElement from "./components/Layout/ScrollToHashElement";
+import Header from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      main: "#0844a4",
+      dark: "#000000",
+      light: "#ffffff",
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ScrollToHashElement />
+      <Header />
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </ThemeProvider>
+      <Footer />
+    </Router>
   );
 }
 
